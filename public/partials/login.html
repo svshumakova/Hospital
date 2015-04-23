@@ -1,0 +1,17 @@
+<form name="loginForm" id="login-container" class="box-default" novalidate="">
+	<fieldset>
+		<h1 class="h2">Login form</h1>
+		<div class="form-group">
+			<label for="login-field">Login</label>
+			<input id="login-field" class="form-control" type="text" placeholder="Enter your login" name="userLogin" ng-model="user.login" required/>
+		</div>
+		<div class="form-group">
+			<label for="password-field">Password</label>
+			<input id="password-field" class="form-control" type="password" placeholder="Enter your password" name="userLogin" ng-model="user.password" required/>
+		</div>
+		<!--<p class="text-danger" ng-show="loginForm.userLogin.$error.required || loginForm.userLogin.$error.required">Invalid password or email</p>-->
+		<div class="text-center">
+			<button type="submit" class="btn btn-success" ng-click="login(user)">Submit</button>
+		</div>
+	</fieldset>
+</form>

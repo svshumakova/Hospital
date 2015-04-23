@@ -1,0 +1,38 @@
+.person-info{
+	overflow:hidden;
+}
+.person-info .text-block{
+	float:left;
+	width:80%;
+}
+.person-info .text-block .check{
+	float:left;
+	margin:2px 10px 0 0;
+	height:16px;
+}
+.person-info .text-block label{
+	overflow:hidden;
+	display:block;
+	margin:0;
+	font-weight:normal;
+}
+.person-info .text-block label > span{
+	display:block;
+}
+.person-info .close{
+	float:right;
+}
+.box-default{
+	border-radius:4px;
+	background:#f8f8f8;
+	border:1px solid #e7e7e7;
+	padding:10px 15px;
+}
+#login-container{
+	width:400px;
+	margin:100px auto 0;
+}
+#login-container h1{
+	margin-top:15px;
+}
+

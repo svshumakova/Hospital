@@ -1,0 +1,57 @@
+<header class="navbar navbar-default navbar-static-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Mental hospital staff</a>
+		</div>
+		<div class="pull-right">
+			<p class="navbar-text">Admin</p>
+			<a href="#/login.html" type="button" class="btn btn-default navbar-btn">Logout</a>
+		</div>
+	</div>
+</header>
+<div id="wrapper" class="container">
+	<div class="row">
+		<aside id="sidebar" class="col-xs-4">
+			<div class="panel panel-default">
+				<ul class="list-group persons-list">
+					<li class="list-group-item person-info" ng-repeat="person in staff" ng-click="editUser(person)">
+						<div class="text-block">
+							<div class="text-primary">{{person.firstName}} {{person.lastName}}</div>
+							<div class="text-muted">{{person.position}}</div>
+							<!--<input id="person{{person.id}}" class="check" type="checkbox"/>
+							<label for="person{{person.id}}" class="label-valigned">
+								<span class="text-primary">{{person.firstName}} {{person.lastName}}</span>
+								<span class="text-muted">{{person.position}}</span>
+							</label>-->
+						</div>
+						<button ng-click="deletePerson(person.id)" class="close"><span class="glyphicon glyphicon-remove"></span></button>
+					</li>
+				</ul>
+				<div class="panel-footer clearfix">
+					<button ng-click="showForm()" class="pull-left btn btn-success">Add employee</button>
+					<!--<button class="pull-right btn btn-danger">Delete employee</button>-->
+				</div>
+			</div>
+		</aside>
+		<div id="content" class="col-xs-8">
+			<form ng-if="isFormOpen" name="employeeForm">
+				<fieldset>
+					<legend>{{isFormEdit ? 'Edit' : 'Add'}} user</legend>
+					<div class="form-group">
+						<label for="first-name">First name</label>
+						<input id="first-name" class="form-control" type="text" placeholder="Enter first name" name="firstName" ng-model="newUser.firstName" required/>
+					</div>
+					<div class="form-group">
+						<label for="last-name">First name</label>
+						<input id="last-name" class="form-control" type="text" placeholder="Enter last name" name="lastName" ng-model="newUser.lastName" required/>
+					</div>
+					<div class="form-group">
+						<label for="position">Position</label>
+						<input id="position" class="form-control" type="text" placeholder="Enter position" name="position" ng-model="newUser.position" required />
+					</div>
+					<button class="btn btn-success" type="submit" ng-click="saveEmployee(newUser)" ng-disabled="employeeForm.$invalid">Save</button>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
