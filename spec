@@ -11,30 +11,103 @@ consumes:
 produces:
   - application/json
 paths:
-  /:
+  /get:
     get:
-      description: |
-        Gets `Employees` objects which contains the id, first name, last name and
-        position of each employee.
-      # Expected responses for this operation:
+      description: Gets the list of employees.
+      operationId: getEmployees
+      produces:
+        - application/json
       responses:
-        # Response code
         200:
-          description: Successful response
-          # A schema describing your response object.
-          # Use JSON Schema format
+          description: An array of employees
           schema:
-            title: ArrayOfEmployees
             type: array
             items:
-              title: Employee
-              type: object
-              properties:
-                id:
-                  type: string
-                firstName:
-                  type: string
-                lastName:
-                  type:string
-                position:
-                  type:string
+              $ref: '#/definitions/Employee'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  /create:
+    post:
+      description: Creates a new emploeey in the hospital.
+      operationId: createEmployee
+      produces:
+        - application/json
+      parameters:
+        - name: employee
+          in: body
+          required: true
+          description: Employee to add to the stuff
+          schema:
+            $ref: '#/definitions/Employee'
+      responses:
+        '200':
+          description: employee has been created
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  /update/{id}:
+    put:
+      description: Update an existing employee
+      operationId: updateEmployee
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: Emploee object that needs to be updated
+          required: true
+          type: string
+      responses:
+        '200':
+          description: employee has been updated
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+  /delete/{id}:
+    delete:
+      description: Delete an existing employee
+      operationId: deleteEmployee
+      produces:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: ID of the employee to delete
+          required: true
+          type: string
+      responses:
+        '200':
+          description: employee has been deleted
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+definitions:
+  Employee:
+    properties:
+      id:
+        type: string
+        description: employee's unique id.
+      firstName:
+        type: string
+        description: employee's first name.
+      lastName:
+        type: string
+        description: employee's last name.
+      position:
+        type: string
+        description: employee's position.
+  ErrorModel:
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
